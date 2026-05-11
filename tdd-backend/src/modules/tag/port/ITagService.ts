@@ -9,4 +9,22 @@ export interface ITagService {
     owner: string;
     createdAt: Date;
   }>;
+
+  updateTag(id: string, ownerId: string, data: { name?: string; color?: string }): Promise<{
+    id: string;
+    name: string;
+    color: string;
+    owner: string;
+    createdAt: Date;
+  }>;
+
+  deleteTag(id: string, ownerId: string): Promise<void>;
+
+  listByOwner(ownerId: string): Promise<Array<{
+    id: string;
+    name: string;
+    color: string;
+    owner: string;
+    createdAt: Date;
+  }>>;
 }
