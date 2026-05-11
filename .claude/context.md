@@ -1,4 +1,4 @@
-# SDD — Contexto do Projeto
+# TDD — Contexto do Projeto
 
 Projeto de TCC. Monorepo com backend em Express/TypeScript e frontend em Next.js/React.
 
@@ -7,7 +7,7 @@ Projeto de TCC. Monorepo com backend em Express/TypeScript e frontend em Next.js
 
 ## Stack
 
-### Backend (`sdd-backend/`)
+### Backend (`tdd-backend/`)
 - **Runtime**: Node.js (CommonJS)
 - **Framework**: Express 5
 - **Linguagem**: TypeScript 6
@@ -15,7 +15,7 @@ Projeto de TCC. Monorepo com backend em Express/TypeScript e frontend em Next.js
 - **Auth**: JWT (ainda não adicionado)
 - **Dev**: `npm run dev` (nodemon + ts-node) na porta definida em `.env` (padrão 3333)
 
-### Frontend (`sdd-frontend/`)
+### Frontend (`tdd-frontend/`)
 - **Framework**: Next.js 16 — App Router (cada pasta em `app/` é uma rota)
 - **UI**: React 19 + Tailwind CSS v4
 - **Linguagem**: TypeScript 5
