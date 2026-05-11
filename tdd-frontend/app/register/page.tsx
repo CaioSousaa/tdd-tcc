@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import axios from '../../lib/axios';
 
 export default function RegisterPage() {
@@ -91,6 +92,13 @@ export default function RegisterPage() {
           >
             {loading ? 'Cadastrando...' : 'Cadastrar'}
           </button>
+          
+          <p className="mt-4 text-center text-sm text-zinc-400">
+            Já possui uma conta?{' '}
+            <Link href="/login" className="text-amber-400 hover:text-amber-300 transition-colors">
+              Entre
+            </Link>
+          </p>
         </form>
       </div>
     </main>
