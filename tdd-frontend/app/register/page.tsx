@@ -3,7 +3,7 @@
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import axios from '../../lib/axios';
+import api from '../../lib/axios';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -19,8 +19,8 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      await axios.post('/users', { name, email, password });
-      router.push('/login');
+      await api.post('/users', { name, email, password });
+      router.push('/');
     } catch (err: any) {
       const status = err?.response?.status;
       if (status === 409) {
@@ -92,10 +92,10 @@ export default function RegisterPage() {
           >
             {loading ? 'Cadastrando...' : 'Cadastrar'}
           </button>
-          
+
           <p className="mt-4 text-center text-sm text-zinc-400">
             Já possui uma conta?{' '}
-            <Link href="/login" className="text-amber-400 hover:text-amber-300 transition-colors">
+            <Link href="/" className="text-amber-400 hover:text-amber-300 transition-colors">
               Entre
             </Link>
           </p>

@@ -24,7 +24,7 @@ describe("RF1 - Cadastro de Usuário (Frontend)", () => {
     expect(screen.getByRole("button", { name: /cadastrar/i })).toBeInTheDocument();
   });
 
-  it("deve redirecionar para /login após cadastro bem-sucedido", async () => {
+  it("deve redirecionar para / após cadastro bem-sucedido", async () => {
     mockAxios.post.mockResolvedValueOnce({ status: 201, data: { id: "1", name: "João" } });
 
     render(<RegisterPage />);
@@ -39,7 +39,7 @@ describe("RF1 - Cadastro de Usuário (Frontend)", () => {
         email: "joao@email.com",
         password: "senha123",
       });
-      expect(mockPush).toHaveBeenCalledWith("/login");
+      expect(mockPush).toHaveBeenCalledWith("/");
     });
   });
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../lib/axios";
+import api from "../lib/axios";
 import { useRouter } from "next/navigation";
 
 interface CreateTagModalProps {
@@ -18,7 +18,7 @@ export default function CreateTagModal({ onClose, onSuccess }: CreateTagModalPro
     setError(null);
 
     try {
-      const response = await axios.post("/tags", { name, color });
+      const response = await api.post("/tags", { name, color });
       if (response.status === 201) {
         onSuccess();
         onClose();

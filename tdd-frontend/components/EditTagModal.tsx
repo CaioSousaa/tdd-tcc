@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../lib/axios";
+import api from "../lib/axios";
 import { useRouter } from "next/navigation";
 
 export interface Tag {
@@ -32,7 +32,7 @@ export default function EditTagModal({ tag, onClose, onSuccess }: EditTagModalPr
     setError(null);
 
     try {
-      await axios.put(`/tags/${tag.id}`, { name, color });
+      await api.put(`/tags/${tag.id}`, { name, color });
       onSuccess();
       onClose();
     } catch (err: any) {
@@ -41,7 +41,7 @@ export default function EditTagModal({ tag, onClose, onSuccess }: EditTagModalPr
       } else if (err.response?.status === 404) {
         setError("Tag não encontrada");
       } else if (err.response?.status === 401) {
-        router.push("/login");
+        router.push("/");
       } else {
         setError("Erro ao editar tag");
       }
@@ -51,7 +51,7 @@ export default function EditTagModal({ tag, onClose, onSuccess }: EditTagModalPr
   const handleDelete = async () => {
     setError(null);
     try {
-      await axios.delete(`/tags/${tag.id}`);
+      await api.delete(`/tags/${tag.id}`);
       onSuccess();
       onClose();
     } catch (err: any) {
@@ -60,7 +60,7 @@ export default function EditTagModal({ tag, onClose, onSuccess }: EditTagModalPr
       } else if (err.response?.status === 404) {
         setError("Tag não encontrada");
       } else if (err.response?.status === 401) {
-        router.push("/login");
+        router.push("/");
       } else {
         setError("Erro ao excluir tag");
       }
