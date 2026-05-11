@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios from "../../lib/axios";
+import api from "../../lib/axios";
 import { useRouter } from "next/navigation";
 import CreateTagModal from "../../components/CreateTagModal";
 import EditTagModal, { Tag } from "../../components/EditTagModal";
@@ -18,11 +18,11 @@ export default function TagsPage() {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get("/tags");
+      const response = await api.get("/tags");
       setTags(response.data);
     } catch (err: any) {
       if (err.response?.status === 401) {
-        router.push("/login");
+        router.push("/");
       } else {
         setError("Erro ao carregar tags");
       }

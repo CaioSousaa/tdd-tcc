@@ -72,13 +72,13 @@ describe("RF6 - Listar Tags (Frontend)", () => {
     });
   });
 
-  it("deve redirecionar para /login em erro 401", async () => {
+  it("deve redirecionar para / em erro 401", async () => {
     mockAxios.get.mockRejectedValueOnce({ response: { status: 401 } });
 
     render(<TagsPage />);
 
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith("/login");
+      expect(mockPush).toHaveBeenCalledWith("/");
     });
   });
 });

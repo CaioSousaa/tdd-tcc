@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import LoginPage from "./page";
-import axios from "../../lib/axios";
+import axios from "../lib/axios";
 
-jest.mock("../../lib/axios");
+jest.mock("../lib/axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 const mockPush = jest.fn();
@@ -42,7 +42,7 @@ describe("RF2 - Autenticação de Usuário (Frontend)", () => {
         email: "joao@email.com",
         password: "senha123",
       });
-      expect(mockPush).toHaveBeenCalledWith("/dashboard");
+      expect(mockPush).toHaveBeenCalledWith("/tasks");
     });
   });
 
