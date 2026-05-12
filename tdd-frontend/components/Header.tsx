@@ -38,6 +38,12 @@ export default function Header() {
             >
               Tags
             </Link>
+            <Link 
+              href="/settings" 
+              className={`text-sm font-medium transition-colors ${pathname === '/settings' ? 'text-amber-400' : 'text-zinc-400 hover:text-zinc-100'}`}
+            >
+              Configurações
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4 border-l border-zinc-800 pl-4">
