@@ -50,7 +50,9 @@ export default function EditTaskPage() {
           setDueDate(new Date(task.dueDate).toISOString().split("T")[0]);
         }
         if (task.alert) {
-          setAlertValue(task.alert);
+          const date = new Date(task.alert);
+          const formatted = date.toISOString().slice(0, 16);
+          setAlertValue(formatted);
         }
 
         setTags(tagsRes.data);
@@ -93,7 +95,7 @@ export default function EditTaskPage() {
 
       if (description.trim()) payload.description = description;
       if (dueDate) payload.dueDate = new Date(dueDate).toISOString();
-      if (alertValue) payload.alert = alertValue;
+      if (alertValue) payload.alert = new Date(alertValue).toISOString();
 
       await api.put(`/tasks/${id}`, payload);
       router.push("/tasks");
@@ -254,7 +256,7 @@ export default function EditTaskPage() {
               </label>
               <input
                 id="alert"
-                type="text"
+                type="datetime-local"
                 value={alertValue}
                 onChange={(e) => setAlertValue(e.target.value)}
                 className="w-full px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 text-zinc-100"
