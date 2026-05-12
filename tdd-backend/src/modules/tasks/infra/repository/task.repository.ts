@@ -8,8 +8,18 @@ export class TaskRepository implements TaskRepositoryPort {
     return await task.save();
   }
 
-  async findByOwner(ownerId: string): Promise<any[]> {
-    return await TaskModel.find({ owner: ownerId }).populate('tags');
+  async findByOwner(ownerId: string, filters?: { priority?: string, tags?: string[] }): Promise<any[]> {
+    const query: any = { owner: ownerId };
+
+    if (filters?.priority) {
+      query.priority = filters.priority;
+    }
+
+    if (filters?.tags && filters.tags.length > 0) {
+      query.tags = { $in: filters.tags };
+    }
+
+    return await TaskModel.find(query).populate('tags');
   }
 
   async findById(id: string): Promise<any> {

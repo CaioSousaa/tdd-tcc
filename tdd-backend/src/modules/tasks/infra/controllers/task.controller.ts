@@ -88,7 +88,14 @@ export class TaskController {
         return;
       }
 
-      const tasks = await this.listTasksService.execute(owner);
+      const { priority, tags } = req.query;
+
+      const filters = {
+        priority: priority as string,
+        tags: tags ? (tags as string).split(',') : undefined
+      };
+
+      const tasks = await this.listTasksService.execute(owner, filters);
       res.status(200).json(tasks);
     } catch (error: any) {
       console.error("500 ERROR:", error);
