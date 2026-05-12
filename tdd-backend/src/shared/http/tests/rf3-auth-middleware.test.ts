@@ -1,7 +1,7 @@
 import request from "supertest";
-import { app } from "../../../main/app";
-import { UserModel } from "../../../infra/mongo/schemas/UserSchema";
-import { TagModel } from "../../../infra/mongo/schemas/TagSchema";
+import app from "../../../main/app";
+import { UserModel } from "../../../infra/mongo/schemas/user.schema";
+import { TagModel } from "../../../infra/mongo/schemas/tag.schema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../../../config/jwt";

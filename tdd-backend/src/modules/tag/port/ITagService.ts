@@ -1,5 +1,5 @@
 import { CreateTagDTO } from "../dto/CreateTagDTO";
-import { ITag } from "../../../infra/mongo/schemas/TagSchema";
+import { ITag } from "../../../infra/mongo/schemas/tag.schema";
 
 export interface ITagService {
   createTag(data: CreateTagDTO): Promise<{

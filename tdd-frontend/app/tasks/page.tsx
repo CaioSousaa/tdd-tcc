@@ -62,6 +62,22 @@ export default function TasksPage() {
     }
   };
 
+  const handleDeleteTask = async (id: string) => {
+    if (!confirm("Tem certeza que deseja excluir esta tarefa?")) return;
+
+    try {
+      setError(null);
+      await api.delete(`/tasks/${id}`);
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        router.push("/");
+      } else {
+        setError("Erro ao excluir tarefa");
+      }
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
   }, [router]);
@@ -118,12 +134,30 @@ export default function TasksPage() {
                 className="bg-zinc-900 border border-zinc-800 rounded-lg p-6 flex flex-col hover:border-zinc-700 transition-colors shadow-lg"
               >
                 <div className="flex justify-between items-start mb-4">
-                  <span className={`px-2 py-0.5 text-xs font-bold rounded border uppercase ${priorityColors[task.priority]}`}>
-                    {priorityLabels[task.priority]}
-                  </span>
-                  <span className="text-xs text-zinc-500">
-                    {statusLabels[task.status]}
-                  </span>
+                  <div className="flex gap-2">
+                    <span className={`px-2 py-0.5 text-xs font-bold rounded border uppercase ${priorityColors[task.priority]}`}>
+                      {priorityLabels[task.priority]}
+                    </span>
+                    <span className="text-[10px] text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700 flex items-center">
+                      {statusLabels[task.status]}
+                    </span>
+                  </div>
+                  <div className="flex gap-1">
+                    <Link
+                      href={`/tasks/${task.id}/edit`}
+                      className="p-1.5 text-zinc-400 hover:text-amber-400 hover:bg-amber-400/10 rounded-md transition-colors"
+                      title="Editar tarefa"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                    </Link>
+                    <button
+                      onClick={() => handleDeleteTask(task.id)}
+                      className="p-1.5 text-zinc-400 hover:text-red-400 hover:bg-red-400/10 rounded-md transition-colors cursor-pointer"
+                      title="Excluir tarefa"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                    </button>
+                  </div>
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-2">{task.title}</h3>

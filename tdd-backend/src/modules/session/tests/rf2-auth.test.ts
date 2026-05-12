@@ -1,6 +1,6 @@
 import request from "supertest";
-import { app } from "../../../main/app";
-import { UserModel } from "../../../infra/mongo/schemas/UserSchema";
+import app from "../../../main/app";
+import { UserModel } from "../../../infra/mongo/schemas/user.schema";
 import bcrypt from "bcrypt";
 
 describe("RF2 - Autenticação de Usuário", () => {

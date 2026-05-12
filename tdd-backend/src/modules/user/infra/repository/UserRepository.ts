@@ -1,4 +1,4 @@
-import { UserModel, IUserDocument } from '../../../../infra/mongo/schemas/UserSchema';
+import { UserModel, IUserDocument } from '../../../../infra/mongo/schemas/user.schema';
 
 export class UserRepository {
   async findByEmail(email: string): Promise<IUserDocument | null> {

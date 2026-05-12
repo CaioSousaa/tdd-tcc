@@ -1,6 +1,6 @@
 import { ISessionService, ISessionResponse } from '../port/ISessionService';
 import { CreateSessionDTO } from '../dto/CreateSessionDTO';
-import { UserModel } from '../../../infra/mongo/schemas/UserSchema';
+import { UserModel } from '../../../infra/mongo/schemas/user.schema';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET, JWT_EXPIRES_IN } from '../../../config/jwt';

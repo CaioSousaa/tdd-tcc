@@ -1,9 +1,9 @@
 import request from "supertest";
-import { app } from "../../../main/app";
+import app from "../../../main/app";
 import mongoose from "mongoose";
 import { TaskModel } from "../../../infra/mongo/schemas/task.schema";
-import { TagModel } from "../../../infra/mongo/schemas/TagSchema";
-import { UserModel } from "../../../infra/mongo/schemas/UserSchema";
+import { TagModel } from "../../../infra/mongo/schemas/tag.schema";
+import { UserModel } from "../../../infra/mongo/schemas/user.schema";
 import jwt from "jsonwebtoken";
 
 import { JWT_SECRET } from "../../../config/jwt";
