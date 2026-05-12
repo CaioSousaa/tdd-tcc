@@ -199,11 +199,10 @@ export default function NewTaskPage() {
               </label>
               <input
                 id="alert"
-                type="text"
+                type="datetime-local"
                 value={alertValue}
                 onChange={(e) => setAlertValue(e.target.value)}
                 className="w-full px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 text-zinc-100"
-                placeholder="Ex: 2025-12-30T08:00"
               />
             </div>
           </div>

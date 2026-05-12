@@ -1,12 +1,14 @@
 import { TaskRepositoryPort } from '../port/task.repository.port';
 import { CreateTaskDTO } from '../dto/create-task.dto';
 import { TagRepository } from '../../tag/infra/repository/TagRepository';
+import { ScheduleAlertService } from './schedule-alert.service';
 import mongoose from 'mongoose';
 
 export class CreateTaskService {
   constructor(
     private readonly taskRepository: TaskRepositoryPort,
-    private readonly tagRepository: TagRepository
+    private readonly tagRepository: TagRepository,
+    private readonly scheduleAlertService: ScheduleAlertService
   ) {}
 
   async execute(data: CreateTaskDTO) {
@@ -34,6 +36,17 @@ export class CreateTaskService {
       }
     }
 
-    return await this.taskRepository.create(data);
+    const task = await this.taskRepository.create(data);
+
+    if (task.alert) {
+      this.scheduleAlertService.schedule(
+        String(task._id),
+        task.title,
+        String(task.owner),
+        task.alert
+      );
+    }
+
+    return task;
   }
 }

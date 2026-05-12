@@ -1,12 +1,14 @@
 import { TaskRepositoryPort } from '../port/task.repository.port';
 import { UpdateTaskDTO } from '../dto/update-task.dto';
 import { TagRepository } from '../../tag/infra/repository/TagRepository';
+import { ScheduleAlertService } from './schedule-alert.service';
 import mongoose from 'mongoose';
 
 export class UpdateTaskService {
     constructor(
         private readonly taskRepository: TaskRepositoryPort,
-        private readonly tagRepository: TagRepository
+        private readonly tagRepository: TagRepository,
+        private readonly scheduleAlertService: ScheduleAlertService
     ) { }
 
     async execute(id: string, userId: string, data: UpdateTaskDTO) {
@@ -53,6 +55,21 @@ export class UpdateTaskService {
         delete (updateData as any).owner;
         delete (updateData as any).createdAt;
 
-        return await this.taskRepository.update(id, updateData);
+        const updatedTask = await this.taskRepository.update(id, updateData);
+
+        if (data.alert !== undefined) {
+            this.scheduleAlertService.cancel(id);
+            
+            if (data.alert && updatedTask && updatedTask.alert) {
+                this.scheduleAlertService.schedule(
+                    id,
+                    updatedTask.title,
+                    String(updatedTask.owner),
+                    updatedTask.alert
+                );
+            }
+        }
+
+        return updatedTask;
     }
 }

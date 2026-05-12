@@ -5,6 +5,7 @@ import { userRoutes } from '../routes/userRoutes';
 import { sessionRoutes } from '../routes/sessionRoutes';
 import { tagRoutes } from '../routes/tagRoutes';
 import { taskRoutes } from '../routes/task.routes';
+import { notificationRoutes } from '../routes/notification.routes';
 
 const app = express();
 export default app;
@@ -15,4 +16,5 @@ app.use(userRoutes);
 app.use(sessionRoutes);
 app.use(tagRoutes);
 app.use('/tasks', taskRoutes);
+app.use('/notifications', notificationRoutes);
 
