@@ -1,6 +1,6 @@
 import request from "supertest";
-import { app } from "../../../main/app";
-import { UserModel } from "../../../infra/mongo/schemas/UserSchema";
+import app from "../../../main/app";
+import { UserModel } from "../../../infra/mongo/schemas/user.schema";
 
 describe("RF1 - Cadastro de Usuário", () => {
   it("deve cadastrar usuário com dados válidos e retornar 201", async () => {

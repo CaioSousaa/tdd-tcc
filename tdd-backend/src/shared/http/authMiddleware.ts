@@ -25,8 +25,12 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { sub: string };
-    req.userId = decoded.sub;
+    const decoded = jwt.verify(token, JWT_SECRET) as { sub?: string; id?: string };
+    req.userId = decoded.sub || decoded.id;
+    if (!req.userId) {
+      res.status(401).json({ error: 'Token inválido: identificador ausente' });
+      return;
+    }
     return next();
   } catch (err) {
     res.status(401).json({ error: 'Token inválido ou expirado' });

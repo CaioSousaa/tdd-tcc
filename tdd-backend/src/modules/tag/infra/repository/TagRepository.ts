@@ -1,4 +1,4 @@
-import { ITag, TagModel } from "../../../../infra/mongo/schemas/TagSchema";
+import { ITag, TagModel } from "../../../../infra/mongo/schemas/tag.schema";
 import { CreateTagDTO } from "../../dto/CreateTagDTO";
 
 export class TagRepository {
